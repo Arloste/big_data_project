@@ -1,7 +1,7 @@
 # reads the dataset into postresql
-#echo "LOGGER: Building the project"
-#python3 scripts/build_projectdb.py
-#echo "LOGGER: Project is built"
+echo "LOGGER: Building the project"
+python3 scripts/build_projectdb.py
+echo "LOGGER: Project is built"
 
 
 # imports the database into HDFS via Sqoop
