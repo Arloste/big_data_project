@@ -17,4 +17,3 @@ echo "LOGGER: Dataset downloaded"
 echo "LOGGER: Preprocessing the dataset"
 python3 scripts/preprocess_dataset.py
 echo "LOGGER: Dataset preprocessed"
-
