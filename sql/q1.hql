@@ -6,8 +6,8 @@ USE team30_projectdb;
 DROP TABLE IF EXISTS q1_results;
 
 CREATE TABLE q1_results(
-vendorId SMALLINT,
-total_amount DECIMAL)
+hour_minute VARCHAR(5),
+n_rides INTEGER)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 location 'project/hive/warehouse/q1';
 
@@ -15,13 +15,14 @@ location 'project/hive/warehouse/q1';
 -- run query & save results in table 
 
 SET hive.resultset.use.unique.column.names = false;
-
 INSERT INTO q1_results
-SELECT p.vendorid as vendorid, SUM(p.total_amount) as total_sum
+SELECT p.pickup_time, COUNT(*)
 FROM (
-    SELECT * FROM rides LIMIT 100
+    SELECT LPAD(CAST(HOUR(pickup_time) AS VARCHAR(2)), 2, '0') || ':' || LPAD(CAST(MINUTE(pickup_time) AS VARCHAR(2)), 2, '0') AS pickup_time
+    FROM rides_part_buck
 ) as p
-GROUP BY p.vendorid;
+GROUP BY p.pickup_time
+ORDER BY p.pickup_time;
 
 
 -- save table to hdfs
