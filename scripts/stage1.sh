@@ -1,6 +1,6 @@
 # reads the dataset into postresql
 echo "LOGGER: Building the project"
-python3 scripts/build_projectdb.py
+python3 scripts/build_projectdb.py 2> /dev/null
 echo "LOGGER: Project is built"
 
 
