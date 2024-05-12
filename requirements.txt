@@ -3,3 +3,5 @@ pyspark
 pandas
 streamlit
 psycopg2
+dask[dataframe]
+tqdm

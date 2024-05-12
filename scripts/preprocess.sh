@@ -12,8 +12,7 @@ rm $dataset_name.zip
 
 echo "LOGGER: Dataset downloaded"
 
-
 # the downloaded dataset contains error and has to be preprocessed
 echo "LOGGER: Preprocessing the dataset"
-python3 scripts/preprocess_dataset.py
+python3 scripts/data_cleaning.py
 echo "LOGGER: Dataset preprocessed"

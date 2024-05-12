@@ -5,28 +5,32 @@ echo "LOGGER: Moving schemas to warehouse/avsc"
 password="GEEzBg4UuiWuNj0T"
 
 # Remove existing folder
-# hdfs dfs -rm -R project/warehouse/avsc
+hdfs dfs -rm -R project/warehouse/avsc
 
 # Clear the trash
-# hdfs dfs -rm -r .Trash
+hdfs dfs -rm -r .Trash
 
 # Create folder for schema
-# hdfs dfs -mkdir -p project/warehouse/avsc
+hdfs dfs -mkdir -p project/warehouse/avsc
 
 # Move schema to folder
-# hdfs dfs -put output/rides.avsc project/warehouse/avsc/
+hdfs dfs -put output/rides.avsc project/warehouse/avsc/
 
 echo "LOGGER: Schemas moved"
 
 
 # Build Hive Tables
 echo "LOGGER: Building Hive Tables"
-# beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/db.hql >> output/hive_results.txt 2> /dev/null
-echo "LOGGER: Built external table"
-# beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/create_partition.hql >> output/hive_results.txt 2> /dev/null
-echo "LOGGER: Created partition"
-# beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/create_bucketing.hql >> output/hive_results.txt 2> /dev/null
-echo "LOGGER: Created buckets"
+
+beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/db.hql >> output/hive_results.txt 2> /dev/null
+echo "LOGGER: Created external table [1/3]"
+
+beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/create_partition.hql >> output/hive_results.txt 2> /dev/null
+echo "LOGGER: Created partition [2/3]"
+
+beeline -u jdbc:hive2://hadoop-03.uni.innopolis.ru:10001 -n team30 -p $password -f sql/create_bucketing.hql >> output/hive_results.txt 2> /dev/null
+echo "LOGGER: Created buckets [3/3]"
+
 echo "LOGGER: Built tables; see output in output/hive_results.txt"
 
 
